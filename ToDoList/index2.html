@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To_Do List</title>
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="list_input">
+            <input type="text" placeholder="New Task" class="form-control">
+            <div class="add"><i class="material-icons">add</i></div>
+        </div>
+        <ul class="todo_list">
+        </ul>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var count = 0;
+            $(".add").click(function(){
+                var inputval = $(".form-control").val();
+                if(inputval != ''){
+                    count++;
+                    $(".todo_list").append('<li><div class="left"><input type="checkbox" id="check-'+count+'" name=""><label for="check-'+count+'"></label><span>'+inputval+'</span></div><span class="remove"><i class="material-icons">delete</i></span></li>');
+                }
+                $(".form-control").val('');
+            })
+            $(document).on('change', 'input[type="checkbox"]', function(){
+                if($(this).is(':checked')) {
+                    $(this).closest("li").children(".remove").addClass("active");
+                }else{
+                    $(this).closest("li").children(".remove").removeClass("active");
+                }
+            })
+            $(document).on('click', '.remove', function(){
+                $(this).parent().remove();
+            })
+        });
+    </script>
+</body>
+</html>
